@@ -1,0 +1,171 @@
+:root {
+  --bg-top: #f5f2df;
+  --bg-bottom: #e2ebf6;
+  --ink: #1d2230;
+  --muted: #495165;
+  --ring-line: #2a3242;
+  --outer-white: #ffffff;
+  --inner-white: #fff9ec;
+  --black-key: #0d0f13;
+  --accent: #d66b00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(170deg, var(--bg-top), var(--bg-bottom));
+}
+
+.app {
+  width: min(920px, 95vw);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.app-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.app-header p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.controls {
+  margin-bottom: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 56px auto 1fr 56px;
+  gap: 10px;
+  align-items: center;
+}
+
+.preset-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: 1px solid #9fa9be;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+.hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dial-wrap {
+  display: grid;
+  place-items: center;
+}
+
+#dial {
+  width: min(88vw, 620px);
+  max-height: 78vh;
+  user-select: none;
+  touch-action: none;
+}
+
+.slice {
+  stroke: var(--ring-line);
+  stroke-width: 1.4;
+}
+
+.slice.white.outer {
+  fill: var(--outer-white);
+}
+
+.slice.white.inner {
+  fill: var(--inner-white);
+}
+
+.slice.black {
+  fill: var(--black-key);
+}
+
+.note-label {
+  font-weight: 700;
+  font-size: 20px;
+  fill: #111;
+  pointer-events: none;
+}
+
+.note-label.inner {
+  font-size: 18px;
+}
+
+.note-label.black {
+  fill: #f5f5f5;
+}
+
+.selected-stroke {
+  stroke: var(--accent);
+  stroke-width: 3.2;
+}
+
+.center-hole {
+  fill: #f8f4e9;
+  stroke: #baa472;
+  stroke-width: 2;
+}
+
+.center-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  fill: #856323;
+}
+
+.center-subtitle {
+  font-size: 13px;
+  fill: #937745;
+}
+
+.result {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+}
+
+.mapping-text {
+  margin: 6px 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .control-row {
+    grid-template-columns: 56px 1fr 56px;
+  }
+
+  .control-row label {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケール変換ダイヤル</title>
+  <meta name="theme-color" content="#d66b00">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="スケール変換">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>スケール変換 早見ダイヤル</h1>
+      <p>外周を基準音として選び、内周を回して変換先を確認します。</p>
+    </header>
+
+    <section class="controls" aria-label="変換コントロール">
+      <div class="control-row">
+        <button id="step-left" type="button" aria-label="反時計回りに1つ回す">-1</button>
+        <label for="rotation">内周回転（半音）</label>
+        <input id="rotation" type="range" min="0" max="11" step="1" value="9">
+        <button id="step-right" type="button" aria-label="時計回りに1つ回す">+1</button>
+      </div>
+      <div class="preset-row">
+        <button id="preset-eb-alto" type="button">E♭アルトサックス（+9）</button>
+        <button id="preset-reset" type="button">リセット（0）</button>
+      </div>
+      <p class="hint">内周リングをドラッグして回すこともできます。</p>
+    </section>
+
+    <section class="dial-wrap" aria-label="スケール変換ダイヤル">
+      <svg id="dial" viewBox="0 0 600 600" role="img" aria-label="12音階の同心円ダイヤル">
+        <g id="outer-ring"></g>
+        <g id="inner-rotor"></g>
+        <circle cx="300" cy="300" r="80" class="center-hole"></circle>
+        <text x="300" y="296" text-anchor="middle" class="center-title">SELECT</text>
+        <text x="300" y="322" text-anchor="middle" class="center-subtitle">OUTER NOTE</text>
+      </svg>
+    </section>
+
+    <section class="result" aria-live="polite">
+      <p>外周の基準音をクリック:</p>
+      <p id="mapping-text" class="mapping-text">C を選択中: 変換先は A</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

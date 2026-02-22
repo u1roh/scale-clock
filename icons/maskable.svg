@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Scale Dial Icon">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f5f2df"/>
+      <stop offset="100%" stop-color="#e2ebf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="196" fill="#fff" stroke="#2a3242" stroke-width="10"/>
+  <circle cx="256" cy="256" r="126" fill="#fff9ec" stroke="#2a3242" stroke-width="10"/>
+  <circle cx="256" cy="256" r="64" fill="#f8f4e9" stroke="#baa472" stroke-width="8"/>
+  <path d="M256 60L272 104L256 148L240 104Z" fill="#d66b00"/>
+  <text x="256" y="280" text-anchor="middle" font-size="54" font-family="'Noto Sans JP','Hiragino Sans',sans-serif" font-weight="700" fill="#1d2230">C</text>
+</svg>
