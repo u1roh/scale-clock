@@ -20,15 +20,8 @@ const STEP_ANGLE = FULL_CIRCLE / 12;
 const svg = document.getElementById("dial");
 const outerRing = document.getElementById("outer-ring");
 const innerRotor = document.getElementById("inner-rotor");
-const rotationInput = document.getElementById("rotation");
-const stepLeftButton = document.getElementById("step-left");
-const stepRightButton = document.getElementById("step-right");
-const presetAltoButton = document.getElementById("preset-eb-alto");
-const presetResetButton = document.getElementById("preset-reset");
-const mappingText = document.getElementById("mapping-text");
 
 let rotationStep = 9; // E♭ Alto to concert quick conversion
-let selectedOuterIndex = 0;
 let dragStartAngle = null;
 let dragStartStep = rotationStep;
 
@@ -91,10 +84,8 @@ function createSlice(group, index, outerR, innerR, ringClass) {
   return path;
 }
 
-const outerSlices = [];
 for (let i = 0; i < 12; i += 1) {
-  const path = createSlice(outerRing, i, 280, 190, "outer");
-  outerSlices.push(path);
+  createSlice(outerRing, i, 280, 190, "outer");
 }
 
 for (let i = 0; i < 12; i += 1) {
@@ -107,60 +98,12 @@ function normalizeStep(step) {
 
 function updateRotation(newStep) {
   rotationStep = normalizeStep(newStep);
-  rotationInput.value = String(rotationStep);
   const displayStep = normalizeStep(-rotationStep);
   innerRotor.setAttribute(
     "transform",
     `rotate(${displayStep * 30} 300 300)`
   );
-  updateMappingText();
 }
-
-function updateSelectedOuter(index) {
-  selectedOuterIndex = index;
-  for (const slice of outerSlices) {
-    slice.classList.remove("selected-stroke");
-  }
-  outerSlices[index].classList.add("selected-stroke");
-  updateMappingText();
-}
-
-function updateMappingText() {
-  const convertedIndex = normalizeStep(selectedOuterIndex + rotationStep);
-  mappingText.textContent =
-    `${NOTES[selectedOuterIndex]} を選択中: 変換先は ${NOTES[convertedIndex]}`;
-}
-
-rotationInput.addEventListener("input", (event) => {
-  updateRotation(Number(event.target.value));
-});
-
-stepLeftButton.addEventListener("click", () => {
-  updateRotation(rotationStep + 1);
-});
-
-stepRightButton.addEventListener("click", () => {
-  updateRotation(rotationStep - 1);
-});
-
-presetAltoButton.addEventListener("click", () => {
-  updateRotation(9);
-});
-
-presetResetButton.addEventListener("click", () => {
-  updateRotation(0);
-});
-
-outerRing.addEventListener("click", (event) => {
-  const target = event.target;
-  if (!(target instanceof SVGPathElement)) {
-    return;
-  }
-  const idx = Number(target.dataset.index);
-  if (Number.isInteger(idx)) {
-    updateSelectedOuter(idx);
-  }
-});
 
 function pointerAngle(clientX, clientY) {
   const rect = svg.getBoundingClientRect();
@@ -194,7 +137,6 @@ innerRotor.addEventListener("pointerup", releaseDrag);
 innerRotor.addEventListener("pointercancel", releaseDrag);
 innerRotor.addEventListener("lostpointercapture", releaseDrag);
 
-updateSelectedOuter(0);
 updateRotation(9);
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
