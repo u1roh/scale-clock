@@ -125,7 +125,7 @@ function updateSelectedOuter(index) {
 }
 
 function updateMappingText() {
-  const convertedIndex = normalizeStep(selectedOuterIndex + rotationStep);
+  const convertedIndex = normalizeStep(selectedOuterIndex - rotationStep);
   mappingText.textContent =
     `${NOTES[selectedOuterIndex]} を選択中: 変換先は ${NOTES[convertedIndex]}`;
 }
