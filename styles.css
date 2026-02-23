@@ -7,6 +7,7 @@
   --outer-white: #ffffff;
   --inner-white: #fff9ec;
   --black-key: #0d0f13;
+  --accent: #d66b00;
 }
 
 * {
@@ -42,6 +43,47 @@ body {
   place-items: center;
 }
 
+.scale-controls {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+}
+
+.scale-controls-title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.scale-toggle-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scale-toggle {
+  border: 1px solid #9fa9be;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.scale-toggle:hover {
+  border-color: var(--accent);
+}
+
+.scale-toggle.is-active {
+  border-color: var(--accent);
+  background: #fff1dd;
+  color: #6d3d00;
+}
+
 #dial {
   width: min(88vw, 620px);
   max-height: 78vh;
@@ -64,6 +106,20 @@ body {
 
 .slice.black {
   fill: var(--black-key);
+}
+
+.slice.white.highlight {
+  fill: #dbe2ec;
+}
+
+.slice.black.highlight {
+  fill: #a2adbe;
+}
+
+.slice.highlight.scale-note {
+  fill: var(--accent);
+  stroke: #9a4c00;
+  stroke-width: 1.8;
 }
 
 .note-label {

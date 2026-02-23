@@ -1,4 +1,4 @@
-const CACHE_NAME = "scale-dial-v1";
+const CACHE_NAME = "scale-dial-v2";
 const APP_SHELL = [
   "./",
   "./index.html",

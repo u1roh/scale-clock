@@ -23,11 +23,24 @@
     <section class="dial-wrap" aria-label="スケール変換ダイヤル">
       <svg id="dial" viewBox="0 0 600 600" role="img" aria-label="12音階の同心円ダイヤル">
         <g id="outer-ring"></g>
+        <g id="highlight-ring"></g>
         <g id="inner-rotor"></g>
         <circle cx="300" cy="300" r="80" class="center-hole"></circle>
         <text x="300" y="292" text-anchor="middle" class="center-title">SCALE</text>
         <text x="300" y="316" text-anchor="middle" class="center-title">CLOCK</text>
       </svg>
+    </section>
+
+    <section class="scale-controls" aria-label="スケールハイライト切り替え">
+      <p class="scale-controls-title">Scale Highlight</p>
+      <div class="scale-toggle-row" role="group" aria-label="ペンタトニックスケール選択">
+        <button id="scale-major-pentatonic" class="scale-toggle" type="button" aria-pressed="false">
+          Major Pentatonic
+        </button>
+        <button id="scale-minor-pentatonic" class="scale-toggle" type="button" aria-pressed="false">
+          Minor Pentatonic
+        </button>
+      </div>
     </section>
   </main>
 
