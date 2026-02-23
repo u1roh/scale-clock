@@ -51,6 +51,25 @@ body {
   border-radius: 12px;
 }
 
+.chord-controls {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d5dce8;
+  border-radius: 12px;
+}
+
+.chord-group + .chord-group {
+  margin-top: 10px;
+}
+
+.chord-group-title {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
 .scale-controls-title {
   margin: 0 0 8px;
   color: var(--muted);

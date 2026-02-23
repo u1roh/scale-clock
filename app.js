@@ -16,6 +16,29 @@ const SCALES = {
   major_pentatonic: [0, 2, 4, 7, 9],
   minor_pentatonic: [0, 3, 5, 7, 10],
 };
+const CHORDS = {
+  major: [0, 4, 7],
+  minor: [0, 3, 7],
+  dominant7: [0, 4, 7, 10],
+  minor7: [0, 3, 7, 10],
+  major7: [0, 4, 7, 11],
+  minor7b5: [0, 3, 6, 10],
+  diminished: [0, 3, 6],
+  diminished7: [0, 3, 6, 9],
+  augmented: [0, 4, 8],
+  sus2: [0, 2, 7],
+  sus4: [0, 5, 7],
+  sixth: [0, 4, 7, 9],
+  minor6: [0, 3, 7, 9],
+  add9: [0, 4, 7, 14],
+  dominant9: [0, 4, 7, 10, 14],
+  major9: [0, 4, 7, 11, 14],
+  minor9: [0, 3, 7, 10, 14],
+  dominant11: [0, 4, 7, 10, 14, 17],
+  dominant13: [0, 4, 7, 10, 14, 17, 21],
+  dominant7b9: [0, 4, 7, 10, 13],
+  dominant7sharp9: [0, 4, 7, 10, 15],
+};
 
 const BLACK_KEYS = new Set([1, 3, 6, 8, 10]);
 const FULL_CIRCLE = Math.PI * 2;
@@ -27,11 +50,13 @@ const highlightRing = document.getElementById("highlight-ring");
 const innerRotor = document.getElementById("inner-rotor");
 const majorPentatonicButton = document.getElementById("scale-major-pentatonic");
 const minorPentatonicButton = document.getElementById("scale-minor-pentatonic");
+const chordButtons = Array.from(document.querySelectorAll("[data-chord-key]"));
 
 let rotationStep = 9; // E♭ Alto to concert quick conversion
 let dragStartAngle = null;
 let dragStartStep = rotationStep;
 let activeScale = null;
+let activeChord = null;
 
 function polarToCartesian(cx, cy, r, angle) {
   return {
@@ -141,8 +166,31 @@ function updateScaleButtons() {
   );
 }
 
+function updateChordButtons() {
+  for (const button of chordButtons) {
+    const chordKey = button.dataset.chordKey;
+    const isActive = chordKey === activeChord;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  }
+}
+
+function chordNoteSet(rootIndex, chordKey) {
+  const intervals = CHORDS[chordKey];
+  const notes = new Set();
+  for (const interval of intervals) {
+    notes.add(normalizeStep(rootIndex + interval));
+  }
+  return notes;
+}
+
 function updateScaleHighlight() {
-  const activeNotes = activeScale ? new Set(SCALES[activeScale]) : null;
+  let activeNotes = null;
+  if (activeChord) {
+    activeNotes = chordNoteSet(0, activeChord);
+  } else if (activeScale) {
+    activeNotes = new Set(SCALES[activeScale]);
+  }
   for (let i = 0; i < highlightSlices.length; i += 1) {
     const shouldHighlight = activeNotes ? activeNotes.has(i) : false;
     highlightSlices[i].classList.toggle("scale-note", shouldHighlight);
@@ -151,7 +199,21 @@ function updateScaleHighlight() {
 
 function toggleScale(nextScale) {
   activeScale = activeScale === nextScale ? null : nextScale;
+  if (activeScale) {
+    activeChord = null;
+  }
   updateScaleButtons();
+  updateChordButtons();
+  updateScaleHighlight();
+}
+
+function toggleChord(nextChord) {
+  activeChord = activeChord === nextChord ? null : nextChord;
+  if (activeChord) {
+    activeScale = null;
+  }
+  updateScaleButtons();
+  updateChordButtons();
   updateScaleHighlight();
 }
 
@@ -195,8 +257,15 @@ minorPentatonicButton.addEventListener("click", () => {
   toggleScale("minor_pentatonic");
 });
 
+for (const button of chordButtons) {
+  button.addEventListener("click", () => {
+    toggleChord(button.dataset.chordKey);
+  });
+}
+
 updateRotation(9);
 updateScaleButtons();
+updateChordButtons();
 updateScaleHighlight();
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {

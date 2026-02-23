@@ -42,6 +42,51 @@
         </button>
       </div>
     </section>
+
+    <section class="chord-controls" aria-label="コードハイライト切り替え">
+      <p class="scale-controls-title">Chord Highlight</p>
+      <div class="chord-group">
+        <p class="chord-group-title">Basic Triads</p>
+        <div class="scale-toggle-row" role="group" aria-label="Basic Triads">
+          <button class="scale-toggle" data-chord-key="major" type="button" aria-pressed="false">Major</button>
+          <button class="scale-toggle" data-chord-key="minor" type="button" aria-pressed="false">Minor</button>
+          <button class="scale-toggle" data-chord-key="diminished" type="button" aria-pressed="false">dim</button>
+          <button class="scale-toggle" data-chord-key="augmented" type="button" aria-pressed="false">aug</button>
+          <button class="scale-toggle" data-chord-key="sus2" type="button" aria-pressed="false">sus2</button>
+          <button class="scale-toggle" data-chord-key="sus4" type="button" aria-pressed="false">sus4</button>
+        </div>
+      </div>
+      <div class="chord-group">
+        <p class="chord-group-title">Seventh Chords</p>
+        <div class="scale-toggle-row" role="group" aria-label="Seventh Chords">
+          <button class="scale-toggle" data-chord-key="dominant7" type="button" aria-pressed="false">7</button>
+          <button class="scale-toggle" data-chord-key="major7" type="button" aria-pressed="false">maj7</button>
+          <button class="scale-toggle" data-chord-key="minor7" type="button" aria-pressed="false">m7</button>
+          <button class="scale-toggle" data-chord-key="minor7b5" type="button" aria-pressed="false">m7♭5</button>
+          <button class="scale-toggle" data-chord-key="diminished7" type="button" aria-pressed="false">dim7</button>
+          <button class="scale-toggle" data-chord-key="sixth" type="button" aria-pressed="false">6</button>
+          <button class="scale-toggle" data-chord-key="minor6" type="button" aria-pressed="false">m6</button>
+        </div>
+      </div>
+      <div class="chord-group">
+        <p class="chord-group-title">Extended (9/11/13)</p>
+        <div class="scale-toggle-row" role="group" aria-label="Extended Chords">
+          <button class="scale-toggle" data-chord-key="add9" type="button" aria-pressed="false">add9</button>
+          <button class="scale-toggle" data-chord-key="dominant9" type="button" aria-pressed="false">9</button>
+          <button class="scale-toggle" data-chord-key="major9" type="button" aria-pressed="false">maj9</button>
+          <button class="scale-toggle" data-chord-key="minor9" type="button" aria-pressed="false">m9</button>
+          <button class="scale-toggle" data-chord-key="dominant11" type="button" aria-pressed="false">11</button>
+          <button class="scale-toggle" data-chord-key="dominant13" type="button" aria-pressed="false">13</button>
+        </div>
+      </div>
+      <div class="chord-group">
+        <p class="chord-group-title">Altered Dominants</p>
+        <div class="scale-toggle-row" role="group" aria-label="Altered Dominants">
+          <button class="scale-toggle" data-chord-key="dominant7b9" type="button" aria-pressed="false">7♭9</button>
+          <button class="scale-toggle" data-chord-key="dominant7sharp9" type="button" aria-pressed="false">7♯9</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="app.js"></script>
