@@ -108,9 +108,10 @@ function normalizeStep(step) {
 function updateRotation(newStep) {
   rotationStep = normalizeStep(newStep);
   rotationInput.value = String(rotationStep);
+  const displayStep = normalizeStep(-rotationStep);
   innerRotor.setAttribute(
     "transform",
-    `rotate(${rotationStep * 30} 300 300)`
+    `rotate(${displayStep * 30} 300 300)`
   );
   updateMappingText();
 }
@@ -125,7 +126,7 @@ function updateSelectedOuter(index) {
 }
 
 function updateMappingText() {
-  const convertedIndex = normalizeStep(selectedOuterIndex - rotationStep);
+  const convertedIndex = normalizeStep(selectedOuterIndex + rotationStep);
   mappingText.textContent =
     `${NOTES[selectedOuterIndex]} を選択中: 変換先は ${NOTES[convertedIndex]}`;
 }
@@ -135,11 +136,11 @@ rotationInput.addEventListener("input", (event) => {
 });
 
 stepLeftButton.addEventListener("click", () => {
-  updateRotation(rotationStep - 1);
+  updateRotation(rotationStep + 1);
 });
 
 stepRightButton.addEventListener("click", () => {
-  updateRotation(rotationStep + 1);
+  updateRotation(rotationStep - 1);
 });
 
 presetAltoButton.addEventListener("click", () => {
@@ -182,7 +183,7 @@ innerRotor.addEventListener("pointermove", (event) => {
   const diff = current - dragStartAngle;
   const rawSteps = diff / STEP_ANGLE;
   const snapped = Math.round(rawSteps);
-  updateRotation(dragStartStep + snapped);
+  updateRotation(dragStartStep - snapped);
 });
 
 function releaseDrag() {
